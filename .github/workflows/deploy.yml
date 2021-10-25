@@ -1,0 +1,31 @@
+name: 'IA Movie on Heroku'
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  frontend-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code.
+        uses: actions/checkout@v2
+
+      - name: Login to Heroku Container registry frontend.
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+
+      - name: Build docker image.
+        run: sudo docker build -t metmuseum .
+
+      - name: Push container to docker registry Heroku.
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a metmuseum web
+
+      - name: Release frontend in Heroku.
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a metmuseum web
