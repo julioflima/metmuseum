@@ -9,7 +9,10 @@
 
 ## [DEMO!!!](https://metmuseum.herokuapp.com/)
 
-https://user-images.githubusercontent.com/17098382/139048208-206bfcd8-a520-4d60-ac2e-281f278f4581.png
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/17098382/139048208-206bfcd8-a520-4d60-ac2e-281f278f4581.png" width="400" alt="Logo">
+</p>
 
 
 ## Design
