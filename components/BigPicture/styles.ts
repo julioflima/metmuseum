@@ -27,7 +27,6 @@ export const ImageContainer = styled.div`
     max-height: 100vh;
     object-fit: scale-down;
     opacity: 1;
-    pointer-events: none;
   }
 `;
 
