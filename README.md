@@ -4,12 +4,13 @@
   </h1>
 </p>
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/17098382/139048208-206bfcd8-a520-4d60-ac2e-281f278f4581.png" width="100" alt="Logo">
+    <img src="https://user-images.githubusercontent.com/17098382/139049389-5ac351ce-e694-429f-82a4-b0770ce7ea20.png" width="100" alt="Logo">
 </p>
 
 ## [DEMO!!!](https://metmuseum.herokuapp.com/)
 
-https://user-images.githubusercontent.com/17098382/133042338-5358e9e3-2413-45f7-973b-4a2df98528c0.mp4
+https://user-images.githubusercontent.com/17098382/139048208-206bfcd8-a520-4d60-ac2e-281f278f4581.png
+
 
 ## Design
 
