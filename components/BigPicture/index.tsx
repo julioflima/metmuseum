@@ -30,7 +30,7 @@ const BigPicture: React.FC<{ objectArt: IObjectArt; onPause: () => void; onResum
             <img draggable="false" src={objectArt.primaryImage} />
           </ImageContainer>
 
-          <Informations open={openInfo}>
+          <Informations id="info" open={openInfo}>
             <h1>{objectArt.objectName}</h1>
             <h4>{objectArt.creditLine}</h4>
           </Informations>

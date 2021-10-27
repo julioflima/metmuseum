@@ -4,7 +4,7 @@
   </h1>
 </p>
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/17098382/138757024-bc287723-e9ee-48ab-b50d-2746a7a25c32.png" width="100" alt="Logo">
+    <img src="https://user-images.githubusercontent.com/17098382/139048208-206bfcd8-a520-4d60-ac2e-281f278f4581.png" width="100" alt="Logo">
 </p>
 
 ## [DEMO!!!](https://metmuseum.herokuapp.com/)
@@ -28,6 +28,16 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
+```
+
+## Testing
+
+First, run the development server:
+
+```bash
+npm run e2e
+# or
+yarn e2e
 ```
 
 ## Hosting
