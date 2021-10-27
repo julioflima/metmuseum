@@ -17,21 +17,24 @@ export default class ArtProvider {
   public async getObject(
     initialBlackList: number[] = [],
     initialIndexes: number[] = []
-  ): Promise<{ objectArt: IObjectArt; blackList: number[]; indexes: number[] }> {
-    const blackList: number[] = [...initialBlackList];
+  ): Promise<{ objectArt: IObjectArt; blacklist: number[]; indexes: number[] }> {
+    const blacklist: number[] = [...initialBlackList];
     let objectArt: IObjectArt = {} as IObjectArt;
 
     const indexes = await this.getIndexes(initialIndexes);
 
     // This was added because some objects were not returning an valid image.
+    let count = 0;
 
     while (!objectArt.primaryImage) {
-      const indexesFiltered = indexes.filter((index) => !blackList.includes(index));
+      count += 1;
+      console.log(count);
+      const indexesFiltered = indexes.filter((index) => !blacklist.includes(index));
       const randomized = Math.floor(Math.random() * indexesFiltered.length);
-      blackList.push(indexesFiltered[randomized]);
+      blacklist.push(indexesFiltered[randomized]);
       objectArt = await new ArtService().get(indexesFiltered[randomized]);
     }
 
-    return { objectArt, blackList, indexes };
+    return { objectArt, blacklist, indexes };
   }
 }

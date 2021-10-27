@@ -27,11 +27,11 @@ export const ImageContainer = styled.div`
   justify-content: center;
   transition: all 0.2s ease-in-out;
 
-  & > Image {
+  & > img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0;
+    max-height: 100vh;
+    object-fit: scale-down;
+    opacity: 1;
     pointer-events: none;
   }
 `;
@@ -46,6 +46,10 @@ export const Informations = styled.div<{ open: boolean }>`
   color: ${({ theme }) => theme.colors.quaternary.one};
 
   padding: 1rem;
+
+  & > h1 {
+    padding-bottom: 1rem;
+  }
 
   & > h4 {
     font-weight: 400;

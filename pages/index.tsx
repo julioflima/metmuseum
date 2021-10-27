@@ -1,7 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
+import useCountDown from 'react-countdown-hook';
 import BigPicture from '../components/BigPicture';
 import { IObjectArt } from '../interfaces/ObjectArt';
 import ArtProvider from '../providers/ArtService';
@@ -12,12 +13,14 @@ const Home: React.FC<{ indexes: number[]; initialBlackList: number[]; initialObj
   initialObjectArt
 }) => {
   const baseSeconds = 10;
-  const baseMiliseconds = 1000 * baseSeconds;
+  const initialTimeMiliseconds = 1000 * baseSeconds;
+  const intervaMiliseconds = 1000 * baseSeconds;
+
+  const [timeLeft, { start, pause, resume }] = useCountDown(initialTimeMiliseconds, intervaMiliseconds);
 
   const [blackList, setBlackList] = React.useState<number[]>(initialBlackList);
   const [objectArtOne, setObjectArtOne] = React.useState<IObjectArt>(initialObjectArt);
   const [objectArtTwo, setObjectArtTwo] = React.useState<IObjectArt>(initialObjectArt);
-  const [nextCicle, setNextCicle] = React.useState<number>(new Date().getTime() + baseMiliseconds);
 
   const oneOrTwo = blackList.length % 2 === 0;
 
@@ -28,42 +31,37 @@ const Home: React.FC<{ indexes: number[]; initialBlackList: number[]; initialObj
     setBlackList((oldState) => [...oldState, newIndex]);
   };
 
-  const updateCicle = (): void => {
-    setNextCicle(new Date().getTime() + baseMiliseconds);
-    updateIndexes();
-  };
+  const nextCicle = useCallback((): void => {
+    if (timeLeft === 0) start();
+  }, [start, timeLeft]);
 
   useEffect(() => {
-    setTimeout(() => {
-      updateCicle();
-    }, baseMiliseconds);
-  });
+    start();
+  }, [start]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     // setNextCicle(new Date().getTime() + baseMiliseconds);
-  //   }, 1000);
-  // });
+  useEffect(() => {
+    nextCicle();
+  }, [nextCicle]);
 
   return (
     <div style={{ width: '100%' }}>
       <Head>
         <title>ArtWork</title>
       </Head>
-      {!oneOrTwo && <BigPicture objectArt={objectArtOne} />}
-      {oneOrTwo && <BigPicture objectArt={objectArtTwo} />}
+      {!oneOrTwo && <BigPicture objectArt={objectArtOne} onPause={pause} onResume={resume} />}
+      {oneOrTwo && <BigPicture objectArt={objectArtTwo} onPause={pause} onResume={resume} />}
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { objectArt, blackList, indexes } = await new ArtProvider().getObject();
+  const { objectArt, blacklist, indexes } = await new ArtProvider().getObject();
   const oneDayInSeconds = 60 * 60 * 24;
 
   return {
     props: {
-      objectArt,
-      blackList,
+      initialObjectArt: objectArt,
+      initialBlackList: blacklist,
       indexes
     },
     revalidate: oneDayInSeconds
