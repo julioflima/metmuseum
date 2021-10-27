@@ -1,9 +1,9 @@
-name: 'IA Movie on Heroku'
+name: 'MetMuseum on Heroku'
 
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   frontend-deploy:

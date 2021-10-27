@@ -1,6 +1,6 @@
 <p align="center">
 	<h1 align="center">
-    <span>ArtWork 🎥</span>
+    <span>ArtWork 🎨</span>
   </h1>
 </p>
 <p align="center">

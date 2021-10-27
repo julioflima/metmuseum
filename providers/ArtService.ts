@@ -23,6 +23,8 @@ export default class ArtProvider {
 
     const indexes = await this.getIndexes(initialIndexes);
 
+    // This was added because some objects were not returning an valid image.
+
     while (!objectArt.primaryImage) {
       const indexesFiltered = indexes.filter((index) => !blackList.includes(index));
       const randomized = Math.floor(Math.random() * indexesFiltered.length);
