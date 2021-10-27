@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ shown: boolean }>`
   height: 100%;
-  display: flex;
   flex-direction: column;
   align-items: center;
   align-items: center;
   justify-content: center;
+  opacity: ${({ shown }) => (shown ? 1 : 0)};
+  display: ${({ shown }) => (shown ? 'flex' : 'none')};
 
   & > * {
     user-select: none;

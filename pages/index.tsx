@@ -7,33 +7,45 @@ import BigPicture from '../components/BigPicture';
 import { IObjectArt } from '../interfaces/ObjectArt';
 import ArtProvider from '../providers/ArtService';
 
-const Home: React.FC<{ indexes: number[]; initialBlackList: number[]; initialObjectArt: IObjectArt }> = ({
-  indexes,
-  initialBlackList,
-  initialObjectArt
-}) => {
+const Home: React.FC<{
+  indexes: number[];
+  initialBlackList: number[];
+  initialObjectArtOne: IObjectArt;
+  initialObjectArtAux: IObjectArt;
+}> = ({ indexes, initialBlackList, initialObjectArtOne, initialObjectArtAux }) => {
   const baseSeconds = 10;
   const initialTimeMiliseconds = 1000 * baseSeconds;
   const intervaMiliseconds = 1000 * baseSeconds;
 
   const [timeLeft, { start, pause, resume }] = useCountDown(initialTimeMiliseconds, intervaMiliseconds);
 
-  const [blackList, setBlackList] = React.useState<number[]>(initialBlackList);
-  const [objectArtOne, setObjectArtOne] = React.useState<IObjectArt>(initialObjectArt);
-  const [objectArtTwo, setObjectArtTwo] = React.useState<IObjectArt>(initialObjectArt);
+  const [blacklist, setBlacklist] = React.useState<number[]>(initialBlackList);
 
-  const oneOrTwo = blackList.length % 2 === 0;
+  // Added system of cache image.
+  const [objectsArts, setObjectsArts] = React.useState<IObjectArt[]>([initialObjectArtOne, initialObjectArtAux]);
 
-  const updateIndexes = (): void => {
-    const indexesFiltered = indexes.filter((index) => !blackList.includes(index));
-    const randomized = Math.floor(Math.random() * indexesFiltered.length);
-    const newIndex = indexesFiltered[randomized];
-    setBlackList((oldState) => [...oldState, newIndex]);
-  };
+  const updateImages = useCallback(async (): Promise<void> => {
+    setObjectsArts((oldState) => oldState.slice(1, 99));
+
+    const { objectArt: objectArtUpdatedOne, blacklist: blacklistUpdatedOne } = await new ArtProvider().getObject(
+      blacklist,
+      indexes
+    );
+    const { objectArt: objectArtUpdatedAux, blacklist: blacklistUpdated } = await new ArtProvider().getObject(
+      blacklistUpdatedOne,
+      indexes
+    );
+
+    setObjectsArts((oldState) => [...oldState, objectArtUpdatedOne, objectArtUpdatedAux]);
+    setBlacklist(blacklistUpdated);
+  }, [blacklist, indexes]);
 
   const nextCicle = useCallback((): void => {
-    if (timeLeft === 0) start();
-  }, [start, timeLeft]);
+    if (timeLeft === 0) {
+      start();
+      updateImages();
+    }
+  }, [start, timeLeft, updateImages]);
 
   useEffect(() => {
     start();
@@ -48,19 +60,27 @@ const Home: React.FC<{ indexes: number[]; initialBlackList: number[]; initialObj
       <Head>
         <title>ArtWork</title>
       </Head>
-      {!oneOrTwo && <BigPicture objectArt={objectArtOne} onPause={pause} onResume={resume} />}
-      {oneOrTwo && <BigPicture objectArt={objectArtTwo} onPause={pause} onResume={resume} />}
+
+      {objectsArts.map((objectArt) => (
+        <BigPicture objectArt={objectArt} onPause={pause} onResume={resume} />
+      ))}
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { objectArt, blacklist, indexes } = await new ArtProvider().getObject();
+  const {
+    objectArt: objectArtUpdatedOne,
+    blacklist: blacklistUpdatedOne,
+    indexes
+  } = await new ArtProvider().getObject();
+  const { objectArt: objectArtUpdatedAux, blacklist } = await new ArtProvider().getObject(blacklistUpdatedOne);
   const oneDayInSeconds = 60 * 60 * 24;
 
   return {
     props: {
-      initialObjectArt: objectArt,
+      initialObjectArtOne: objectArtUpdatedOne,
+      initialObjectArtAux: objectArtUpdatedAux,
       initialBlackList: blacklist,
       indexes
     },

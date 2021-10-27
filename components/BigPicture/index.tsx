@@ -9,7 +9,7 @@ const BigPicture: React.FC<{ objectArt: IObjectArt; onPause: () => void; onResum
   onResume,
   onPause
 }) => {
-  const [openInfo, setOpenInfo] = useState(false);
+  const [openInfo, setOpenInfo] = useState(true);
 
   const handleClick = (): void => {
     setOpenInfo((oldState) => {
@@ -23,7 +23,7 @@ const BigPicture: React.FC<{ objectArt: IObjectArt; onPause: () => void; onResum
   };
 
   return (
-    <Container onClick={handleClick}>
+    <Container onClick={handleClick} shown>
       {objectArt && (
         <>
           <ImageContainer>
