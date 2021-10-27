@@ -76,25 +76,20 @@ export default createGlobalStyle`
  }
  
  body {
-   margin: 0;
-   font-family: var(--font-sans-one);
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   min-height: 100%;
+  margin: 0;
+  font-family: var(--font-sans-one);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
  }
  
   
  
    #__next{
-     background: ${({ theme }) => theme.colors.primary.two};
-     min-height: 100%;
-     width: 100%;
-     display: flex;
-     flex: 1;
-     flex-wrap: wrap;
-     position: absolute;
-     flex-direction: column;
-     overflow-y: scroll;
-     overflow-x: hidden;
+    display: flex;
+    height: 100%;
    }
  `;

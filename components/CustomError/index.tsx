@@ -10,7 +10,7 @@ const CustomError: React.FC<{ path: string; text: string }> = ({ path, text }) =
   return (
     <>
       <Head>
-        <title>{`I.A. Movie - ${text}`}</title>
+        <title>{`ArtWork - ${text}`}</title>
       </Head>
       <Link href="/" passHref>
         <Container>

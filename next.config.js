@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['images.metmuseum.org', 'metmuseum.herokuapp.com']
+    domains: ['images.metmuseum.org', 'metmuseum.herokuapp.com', 'static1.purebreak.com.br']
   }
 };

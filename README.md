@@ -4,7 +4,7 @@
   </h1>
 </p>
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/17098382/133039368-a98cccb1-8f96-46fb-a697-20975d2a4828.png" width="100" alt="Logo">
+    <img src="https://user-images.githubusercontent.com/17098382/138757024-bc287723-e9ee-48ab-b50d-2746a7a25c32.png" width="100" alt="Logo">
 </p>
 
 ## [DEMO!!!](https://metmuseum.herokuapp.com/)
@@ -67,15 +67,7 @@ yarn dev
 ## Back End
 
 <p align="justify">
-To not expose the enviroment secrets to call the backend of <a href="https://developers.themoviedb.org/4/getting-started/authorization">TMDB API</a>, was used Serverless Functions that the NextJS provide to use.
-<p align="justify">
-By this way, every page called is generated on backend, so no "env" is exposed and in case of some call to api happening in frontend gonna be call a Serverless Function available on <strong><i>/api/*</i></strong>.
-</p>
-<p align="justify">
-The <a href="https://nextjs.org/docs/api-routes/introduction">API routes</a> can be accessed on <a href="http://localhost:3000/api/favorites">http://localhost:3000/api/favorites</a>. This endpoint can be edited in <strong><i>pages/api/favorites.ts</i></strong>.
-</p>
-<p align="justify">
-The <strong><i>pages/api</i></strong> directory is mapped to <strong><i>/api/*</i></strong>. Files in this directory are treated as <a href="https://nextjs.org/docs/api-routes/introduction">API routes</a> instead of React pages.
+By this way, every page called is generated on backend, so no "env" is exposed to save the public base URL.
 </p>
 
 ## Front End

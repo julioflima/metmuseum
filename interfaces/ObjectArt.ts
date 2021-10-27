@@ -1,7 +1,7 @@
 export interface IObjectMeasument {
   elementName: string;
   elementDescription: string | null;
-  elementMeasurements: {};
+  elementMeasurements: [];
 }
 
 export interface IObjectArtIndex {

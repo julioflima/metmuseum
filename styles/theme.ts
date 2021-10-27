@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 export const theme = {
   colors: {
-    primary: { one: '#161A36', two: '#212040', three: '#242444', four: '#556FE5', five: '#076ACE', six: '#3FB7FE' },
+    primary: { one: '#353535', two: '#505050' },
     secondary: { one: '#FFEB39', two: '#FFDF39', three: '#FFC839', four: '#E1A766', six: 'orange' },
     tertiary: {
       one: '#FF395D',
