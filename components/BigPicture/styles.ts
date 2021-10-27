@@ -1,20 +1,14 @@
 import styled from 'styled-components';
 
-export const Container = styled.div<{ shown: boolean }>`
+export const Container = styled.div`
   height: 100%;
   flex-direction: column;
   align-items: center;
   align-items: center;
   justify-content: center;
-  opacity: ${({ shown }) => (shown ? 1 : 0)};
-  display: ${({ shown }) => (shown ? 'flex' : 'none')};
 
   & > * {
     user-select: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
     user-drag: none;
   }
 `;

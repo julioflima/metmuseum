@@ -25,7 +25,7 @@ const Home: React.FC<{
   const [objectsArts, setObjectsArts] = React.useState<IObjectArt[]>([initialObjectArtOne, initialObjectArtAux]);
 
   const updateImages = useCallback(async (): Promise<void> => {
-    setObjectsArts((oldState) => oldState.slice(1, 99));
+    setObjectsArts((oldState) => oldState.slice(1));
 
     const { objectArt: objectArtUpdatedOne, blacklist: blacklistUpdatedOne } = await new ArtProvider().getObject(
       blacklist,
@@ -46,7 +46,6 @@ const Home: React.FC<{
       updateImages();
     }
   }, [start, timeLeft, updateImages]);
-
   useEffect(() => {
     start();
   }, [start]);
@@ -62,7 +61,7 @@ const Home: React.FC<{
       </Head>
 
       {objectsArts.map((objectArt) => (
-        <BigPicture objectArt={objectArt} onPause={pause} onResume={resume} />
+        <BigPicture key={objectArt.objectID} objectArt={objectArt} onPause={pause} onResume={resume} />
       ))}
     </div>
   );
